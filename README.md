@@ -13,23 +13,34 @@ No videos. You write code, run the tests, and push to GitHub. Every lesson has a
 
 1. Click **Use this template**, then **Create a new repository**.
 2. Clone your new repository:
+
 ```bash
-   git clone https://github.com/<your-username>/go-learn-by-doing.git
-   cd go-learn-by-doing
+   git clone https://github.com/<your-username>/<your-repo-name>.git
+   cd <your-repo-name>
 ```
+
 3. Install Go from https://go.dev/dl and check it:
+
 ```bash
    go version
 ```
+
 4. Open the first lesson and read its `README.md`:
-```
-   lessons/1-beginner/01-hello-world/
-```
+   [Lesson 01: Hello World](lessons/1-beginner/01-hello-world/README.md)
 5. Edit `main.go` and run the test:
+
 ```bash
    go test ./lessons/1-beginner/01-hello-world/
 ```
-6. When the test passes, commit and push. GitHub Actions will check your work.
+
+6. When the test passes, commit and push. Open the **Actions** tab to see GitHub check your work (green tick = pass).
+7. Tick the lesson in the checklist below (change `[ ]` to `[x]`) in your own copy of this README, then commit that too.
+
+## How a lesson works
+
+```
+Read README → Edit main.go → go test → Fix → Pass → Commit & push → Tick checklist → Next lesson
+```
 
 ## Course levels
 
@@ -42,8 +53,10 @@ No videos. You write code, run the tests, and push to GitHub. Every lesson has a
 
 ## Progress checklist
 
+Change `[ ]` to `[x]` when you finish a lesson.
+
 ### Beginner
-- [ ] 01 - Hello World
+- [ ] [01 - Hello World](lessons/1-beginner/01-hello-world/README.md)
 - [ ] 02 - Variables and Types
 - [ ] 03 - Conditionals
 - [ ] 04 - Loops
@@ -60,7 +73,7 @@ No videos. You write code, run the tests, and push to GitHub. Every lesson has a
 
 ## Stuck?
 
-Look at the `solutions` branch, but try on your own first.
+Look at the `solutions` branch of the original repo, but try on your own first.
 
 ## Contributing
 
