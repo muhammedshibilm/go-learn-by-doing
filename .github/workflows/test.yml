@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - solutions
   pull_request:
 
 jobs:
@@ -20,7 +21,12 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - name: Test changed lessons
+      - name: Test all lessons (solutions branch)
+        if: github.ref_name == 'solutions'
+        run: go test ./lessons/... -v
+
+      - name: Test changed lessons (main and pull requests)
+        if: github.ref_name != 'solutions'
         env:
           EVENT: ${{ github.event_name }}
           BASE_REF: ${{ github.base_ref }}
