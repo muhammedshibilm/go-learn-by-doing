@@ -1,0 +1,31 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+
+# Test binaries and coverage
+*.test
+*.out
+coverage.txt
+coverage.html
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Dependency folder (if you use vendoring)
+vendor/
+
+# Environment files (never commit secrets)
+.env
+.env.*
+
+# Editor and OS files
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
