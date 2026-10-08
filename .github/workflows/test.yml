@@ -6,18 +6,49 @@ on:
       - main
   pull_request:
 
-
 jobs:
   check-lessons:
     runs-on: ubuntu-latest
     steps:
       - name: Get the code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
-          go-version: 1.23
-      
-      - name: Run lesson tests
-        run: go test ./lessons/... -v
+          go-version-file: go.mod
+
+      - name: Test changed lessons
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT" = "pull_request" ]; then
+            BASE="origin/$BASE_REF"
+          else
+            BASE="$BEFORE"
+          fi
+
+          # first push of a branch has an all-zero "before" value
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="HEAD~1"
+          fi
+
+          dirs=$(git diff --name-only "$BASE" HEAD | grep '^lessons/' | xargs -r -n1 dirname | sort -u)
+
+          if [ -z "$dirs" ]; then
+            echo "No lesson changes to test."
+            exit 0
+          fi
+
+          fail=0
+          for d in $dirs; do
+            if [ -d "$d" ] && ls "$d"/*.go >/dev/null 2>&1; then
+              echo "=== Testing $d ==="
+              go test "./$d" -v || fail=1
+            fi
+          done
+          exit $fail
