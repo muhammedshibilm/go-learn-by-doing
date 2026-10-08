@@ -57,7 +57,7 @@ Change `[ ]` to `[x]` when you finish a lesson.
 
 ### Beginner
 - [ ] [01 - Hello World](lessons/1-beginner/01-hello-world/README.md)
-- [ ] [02 - Variables and Types] (lessons/1-beginner/02-variables/README.md)
+- [ ] [02 - Variables and Types](lessons/1-beginner/02-variables/README.md)
 - [ ] 03 - Conditionals
 - [ ] 04 - Loops
 - [ ] 05 - Functions
