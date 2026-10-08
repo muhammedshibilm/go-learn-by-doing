@@ -1,0 +1,23 @@
+name: Check lessons
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+
+jobs:
+  check-lessons:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.23
+      
+      - name: Run lesson tests
+        run: go test ./lessons/... -v
